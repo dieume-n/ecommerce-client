@@ -3,7 +3,7 @@
     <div class="container is-fluid">
       <div class="columns">
         <div class="column is-half">
-          <img src="http://via.placeholder.com/620x620" alt="Product name" />
+          <img src="@/assets/images/620x620.png" :alt="product.name" />
         </div>
         <div class="column is-half">
           <section class="section">
@@ -12,7 +12,17 @@
               {{ product.description }}
             </p>
             <hr />
-            <span class="tag is-rounded is-medium"> Product price </span>
+            <span class="tag is-rounded is-medium"> {{ product.price }} </span>
+          </section>
+          <section class="section">
+            <form>
+              <ProductVariation
+                v-for="(variations, type) in product.variations"
+                :type="type"
+                :variations="variations"
+                :key="type"
+              />
+            </form>
           </section>
         </div>
       </div>
@@ -20,7 +30,11 @@
   </div>
 </template>
 <script>
+import ProductVariation from "@/components/products/ProductVariation"
 export default {
+  components: {
+    ProductVariation
+  },
   data() {
     return {
       product: null,

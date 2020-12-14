@@ -3,7 +3,7 @@
     <div class="card-image">
       <figure class="image is4by3">
         <nuxt-link :to="link">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="" />
+          <img src="@/assets/images/1280x960.png" :alt="product.name" />
         </nuxt-link>
       </figure>
     </div>
@@ -19,7 +19,7 @@
         <p v-if="product.description">
           {{ product.description }}
         </p>
-        <span class="tag is-rounded is-medium">Product price</span>
+        <span class="tag is-rounded is-medium">{{ product.price }}</span>
       </div>
     </div>
   </div>
