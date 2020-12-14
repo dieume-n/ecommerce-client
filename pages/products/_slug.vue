@@ -21,7 +21,21 @@
                 :type="type"
                 :variations="variations"
                 :key="type"
+                v-model="form.variation"
               />
+              <!-- {{ form }} -->
+              <div class="field has-addons mt-4" v-if="form.variation">
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select name="" id="">
+                      <option value="">1</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control">
+                  <button type="submit" class="button is-info">Add to cart</button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -38,6 +52,10 @@ export default {
   data() {
     return {
       product: null,
+      form: {
+        variation: '',
+        quantity: 1
+      }
     };
   },
   async asyncData({ params, app }) {
