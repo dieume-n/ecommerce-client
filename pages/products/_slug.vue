@@ -28,8 +28,10 @@
               <div class="field has-addons mt-4" v-if="form.variation">
                 <div class="control">
                   <div class="select is-fullwidth">
-                    <select name="" id="">
-                      <option value="">1</option>
+                    <select name="" id="" v-model="form.quantity">
+                      <option :value="x" v-for="x in parseInt(form.variation.stock_count)" :key="x">
+                        {{ x }}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -58,6 +60,11 @@ export default {
         quantity: 1
       }
     };
+  },
+  watch:{
+    'form.variation' (){
+      this.form.quantity = 1
+    }
   },
   async asyncData({ params, app }) {
     const response = await app.$axios.$get(`products/${params.slug}`);
