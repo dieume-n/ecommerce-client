@@ -31,8 +31,42 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     '@nuxtjs/bulma',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+
+  auth:{
+    strategies: {
+      'laravelJWT': {
+        provider: 'laravel/jwt',
+        url: "http://ecommerce.test/api/",
+        endpoints: {
+          login:{
+            url: "auth/signin",
+            method: 'post',
+          },
+          register:{
+            url: "auth/signup",
+            method: 'post',
+          },
+          user: {
+            url: "auth/me",
+            method: 'get',
+          },
+        },
+        user: {
+          property: 'data'
+        },
+        token: {
+          property: 'meta.token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        },
+      },
+    }
+  },
   axios: {
     baseURL: 'http://ecommerce.test/api',
   },
