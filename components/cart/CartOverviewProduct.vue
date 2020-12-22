@@ -12,8 +12,8 @@
       <div class="field">
         <div class="control">
           <div class="select is-fullwidth">
-            <select>
-              <option value="0">0</option>
+            <select v-model="quantity">
+              <option value="0" v-if="product.quantity == 0">0</option>
               <option
                 :value="x"
                 v-for="x in product.stock_count"
@@ -42,9 +42,20 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      quantity: this.product.quantity,
+    };
+  },
+  watch: {
+    quantity(quantity) {
+      this.update({ productId: this.product.id, quantity });
+    },
+  },
   methods: {
     ...mapActions({
       deleteProduct: "cart/deleteProduct",
+      update: "cart/updateProduct",
     }),
   },
 };
