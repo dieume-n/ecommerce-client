@@ -25,7 +25,7 @@
 						</span>
 					</section>
 					<section class="section">
-						<form>
+						<form @submit.prevent="add">
 							<ProductVariation
 								v-for="(variations, type) in product.variations"
 								:type="type"
@@ -33,6 +33,7 @@
 								:key="type"
 								v-model="form.variation"
 							/>
+
 							<!-- {{ form }} -->
 							<div
 								class="field has-addons mt-4"
@@ -74,6 +75,7 @@
 	</div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import ProductVariation from "@/components/products/ProductVariation";
 export default {
 	components: {
@@ -91,6 +93,23 @@ export default {
 	watch: {
 		"form.variation"() {
 			this.form.quantity = 1;
+		},
+	},
+	methods: {
+		...mapActions({
+			addToCart: "cart/addToCart",
+		}),
+		add() {
+			this.addToCart([
+				{
+					id: this.form.variation.id,
+					quantity: this.form.quantity,
+				},
+			]);
+			this.form = {
+				variation: "",
+				quantity: 1,
+			};
 		},
 	},
 	async asyncData({ params, app }) {
