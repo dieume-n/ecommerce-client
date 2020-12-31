@@ -13,6 +13,7 @@
 					<p class="has-text-weight-bold">Subtotal</p>
 				</td>
 				<td>{{ subTotal }}</td>
+				<td></td>
 			</tr>
 		</tbody>
 	</table>

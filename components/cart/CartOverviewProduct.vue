@@ -7,7 +7,9 @@
 				style="width: 60px; height: 60px"
 			/>
 		</td>
-		<td>{{ product.product.name }} / {{ product.name }}</td>
+		<td>
+			{{ product.product.name }} / {{ product.type }} {{ product.name }}
+		</td>
 		<td width="160">
 			<div class="field">
 				<div class="control">

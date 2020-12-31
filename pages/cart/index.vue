@@ -32,6 +32,7 @@ export default {
 		...mapGetters({
 			empty: "cart/empty",
 			products: "cart/products",
+			changed: "cart/changed",
 		}),
 	},
 };
