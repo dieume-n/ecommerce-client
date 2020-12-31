@@ -44,6 +44,7 @@
 	</div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
 	data() {
 		return {
@@ -54,10 +55,15 @@ export default {
 		};
 	},
 	methods: {
-		async signin() {
-			await this.$auth.loginWith("laravelJWT", {
-				data: this.form,
-			});
+		...mapActions({
+			getCart: "cart/getCart",
+		}),
+		async signin({ dispatch }) {
+			await this.$auth
+				.loginWith("laravelJWT", {
+					data: this.form,
+				})
+				.then(() => this.getCart());
 		},
 	},
 };
