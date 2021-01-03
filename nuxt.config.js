@@ -58,7 +58,7 @@ export default {
                     property: 'data'
                 },
                 token: {
-                    property: 'meta.token',
+                    property: 'token',
                     maxAge: 60 * 60
                 },
                 refreshToken: {
