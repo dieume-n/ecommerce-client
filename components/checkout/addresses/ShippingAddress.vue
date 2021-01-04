@@ -9,6 +9,12 @@
           @click="addressSelected"
         />
       </div>
+      <div v-else-if="creating">
+        <ShippingAddressCreator
+          @cancel="creating = false"
+          @created="addressCreated"
+        />
+      </div>
       <div v-else>
         <template v-if="selectedAddress">
           <div>
@@ -24,13 +30,22 @@
         </template>
         <div class="mt-2 field is-grouped">
           <p class="control">
-            <a
-              href="#"
+            <button
+              type="button"
               class="button is-info"
               @click.prevent="selecting = true"
             >
               Change shipping address
-            </a>
+            </button>
+          </p>
+          <p class="control">
+            <button
+              type="button"
+              class="button is-info"
+              @click.prevent="creating = true"
+            >
+              Add an address
+            </button>
           </p>
         </div>
       </div>
@@ -39,9 +54,11 @@
 </template>
 <script>
 import ShippingAddressSelector from "@/components/checkout/addresses/ShippingAddressSelector";
+import ShippingAddressCreator from "@/components/checkout/addresses/ShippingAddressCreator";
 export default {
   components: {
     ShippingAddressSelector,
+    ShippingAddressCreator,
   },
   props: {
     addresses: {
@@ -52,6 +69,7 @@ export default {
   data() {
     return {
       selecting: false,
+      creating: false,
       localAddresses: this.addresses,
       selectedAddress: null,
     };
@@ -68,6 +86,11 @@ export default {
     addressSelected(address) {
       this.switchAddress(address);
       this.selecting = false;
+    },
+    addressCreated(address) {
+      this.localAddresses.push(address);
+      this.creating = false;
+      this.switchAddress(address);
     },
   },
   created() {
