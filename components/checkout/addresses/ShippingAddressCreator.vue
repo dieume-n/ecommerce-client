@@ -54,9 +54,7 @@
           <label for="country" class="label">Country</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select v-model="form.country_id">
-                <option value="1">Afghanistan</option>
-              </select>
+              <CountryDropdown v-model="form.country_id" />
             </div>
           </div>
         </div>
@@ -78,7 +76,11 @@
   </form>
 </template>
 <script>
+import CountryDropdown from "@/components/form/CountryDropdown";
 export default {
+  components: {
+    CountryDropdown,
+  },
   data() {
     return {
       form: {
@@ -87,7 +89,7 @@ export default {
         address_2: "",
         city: "",
         postal_code: "",
-        country_id: null,
+        country_id: "",
         default: true,
       },
     };
